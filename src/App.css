@@ -1,0 +1,85 @@
+
+body{
+  background-color: #F5F7FB;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+}
+
+/* start-screen */
+
+.main-div{
+  width: 100%;
+  min-height: 100vh;
+  background-color: #F5F7FB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-div .start-button{
+  position: relative;
+  width: 200px;
+  height: 50px;
+  background-color: #4D5B9E;
+  border-radius: 15px;
+  border: none;
+  padding: 10px;
+  color: white;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.main-div .blob1{
+  width: 40%;
+  text-align: right;
+  position: absolute;
+  overflow: hidden;
+  right: -15%;
+  top: -30%;
+}
+
+.main-div .blob2{
+  width: 40%;
+  text-align: left;
+  position: absolute;
+  overflow: hidden;
+  left: -7%;
+  bottom: -15%;
+}
+
+/* quiz */
+
+.main-div .question{
+  color: #293264;
+  font-weight: 700;
+  font-family: 'Karla', sans-serif;
+  line-height: 18px;
+}
+
+.main-div .answer-btn{
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  border: #293264 solid 0.8px;
+  border-radius: 10px;
+  color: #293264;
+  padding: 10px;
+  margin: 10px 10px 10px 0;
+}
+
+.container{
+  border-bottom: #DBDEF0 solid 0.8px;
+}
+
+.main-div .check-button{
+  margin-top: 50px;
+  margin-left: 45%;
+  width: 200px;
+  height: 50px;
+  background-color: #4D5B9E;
+  border-radius: 15px;
+  border: none;
+  padding: 10px;
+  color: white;
+  font-weight: 500;
+  line-height: 20px;
+}
