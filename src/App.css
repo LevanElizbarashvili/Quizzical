@@ -16,6 +16,13 @@ body{
   align-items: center;
 }
 
+.main-div .headline{
+  font-family: Karla, serif;
+  color: #293264;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 .main-div .start-button{
   position: relative;
   width: 200px;
