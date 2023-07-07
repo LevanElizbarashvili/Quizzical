@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { nanoid } from "nanoid";
+import React, {useEffect, useState} from "react";
+import {nanoid} from "nanoid";
 import shuffleArray from "../utils";
 
 export default function Question() {
@@ -11,25 +11,27 @@ export default function Question() {
     "https://opentdb.com/api.php?amount=5&difficulty=medium&type=multiple&encode=base64";
 
   useEffect(() => {
-    async function getTests() {
-      const res = await fetch(url);
-      const data = await res.json();
-      const arr = [];
-      data.results.forEach((element) => {
-        arr.push({
-          id: nanoid(),
-          question: element.question,
-          correct: element.correct_answer,
-          answers: shuffleArray([
-            ...element.incorrect_answers,
-            element.correct_answer,
-          ]),
-        });
-      });
-      setTests((prevState) => (prevState = arr));
-    }
-    getTests();
-  }, []);
+          async function getTests() {
+              const res = await fetch(url);
+              const data = await res.json();
+              const arr = [];
+              data.results.forEach((element) => {
+                  arr.push({
+                      id: nanoid(),
+                      question: element.question,
+                      correct: element.correct_answer,
+                      answers: shuffleArray([
+                          ...element.incorrect_answers,
+                          element.correct_answer,
+                      ]),
+                  });
+              });
+              setTests((prevState) => (prevState = arr));
+          }
+
+          getTests();
+      },
+      []);
 
   function clickHandler(e) {
     e.target.style.backgroundColor = "#D6DBF5";
