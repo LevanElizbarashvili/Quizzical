@@ -1,5 +1,4 @@
-
-body{
+body {
   background-color: #F5F7FB;
   font-family: 'Inter', sans-serif;
   overflow: hidden;
@@ -7,7 +6,7 @@ body{
 
 /* start-screen */
 
-.main-div{
+.main-div {
   width: 100%;
   min-height: 100vh;
   background-color: #F5F7FB;
@@ -16,14 +15,14 @@ body{
   align-items: center;
 }
 
-.main-div .headline{
+.main-div .headline {
   font-family: Karla, serif;
   color: #293264;
   text-align: center;
   margin-bottom: 30px;
 }
 
-.main-div .start-button{
+.main-div .start-button {
   position: relative;
   width: 200px;
   height: 50px;
@@ -36,7 +35,7 @@ body{
   line-height: 20px;
 }
 
-.main-div .blob1{
+.main-div .blob1 {
   width: 40%;
   text-align: right;
   position: absolute;
@@ -45,7 +44,7 @@ body{
   top: -30%;
 }
 
-.main-div .blob2{
+.main-div .blob2 {
   width: 40%;
   text-align: left;
   position: absolute;
@@ -56,14 +55,14 @@ body{
 
 /* quiz */
 
-.main-div .question{
+.main-div .question {
   color: #293264;
   font-weight: 700;
   font-family: 'Karla', sans-serif;
   line-height: 18px;
 }
 
-.main-div .answer-btn{
+.main-div .answer-btn {
   font-weight: 500;
   font-family: 'Inter', sans-serif;
   border: #293264 solid 0.8px;
@@ -71,13 +70,14 @@ body{
   color: #293264;
   padding: 10px;
   margin: 10px 10px 10px 0;
+  min-width: 100px;
 }
 
-.container{
+.container {
   border-bottom: #DBDEF0 solid 0.8px;
 }
 
-.main-div .check-button{
+.main-div .check-button {
   margin-top: 50px;
   margin-left: 45%;
   width: 200px;
@@ -89,4 +89,18 @@ body{
   color: white;
   font-weight: 500;
   line-height: 20px;
+}
+
+.score {
+  color: #293264;
+  font-weight: 700;
+  font-family: 'Karla', sans-serif;
+  font-size: 20px;
+  line-height: 18px;
+}
+
+.score-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
