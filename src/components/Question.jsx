@@ -6,6 +6,7 @@ export default function Question() {
   const [tests, setTests] = useState([]);
   const [ischecked, setIschecked] = useState([]);
   const [score, setScore] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const url =
     "https://opentdb.com/api.php?amount=5&difficulty=medium&type=multiple&encode=base64";
@@ -27,6 +28,7 @@ export default function Question() {
         });
       });
       setTests((prevState) => (prevState = arr));
+      setIsLoading(false);
     }
 
     getTests();
@@ -43,7 +45,6 @@ export default function Question() {
       .filter((correctAnswer) => ischecked.includes(correctAnswer));
     const score = correct.length;
     setScore(score);
-    console.log(score);
   }
 
   const list = tests.map((test) => {
@@ -88,17 +89,21 @@ export default function Question() {
 
   return (
     <div className="main-div">
-      <div>
-        {list}
-        <div className="score-button-container">
-          <div className="score">
-            {score ? "Correct answers: " + score + "/5" : ""}
+      {isLoading ? (
+        <h1>Loading...</h1>
+      ) : (
+        <div>
+          {list}
+          <div className="score-button-container">
+            <div className="score">
+              {score ? "Correct answers: " + score + "/5" : ""}
+            </div>
+            <button className="check-button" onClick={check}>
+              Check answers
+            </button>
           </div>
-          <button className="check-button" onClick={check}>
-            Check answers
-          </button>
         </div>
-      </div>
+      )}
     </div>
   );
 }
