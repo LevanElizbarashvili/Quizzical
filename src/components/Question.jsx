@@ -3,13 +3,21 @@ import { nanoid } from "nanoid";
 import shuffleArray from "../utils";
 
 export default function Question() {
+  // state to store questions
   const [tests, setTests] = useState([]);
+  // state to check correct answers
   const [ischecked, setIschecked] = useState([]);
+  // state to store score
   const [score, setScore] = useState(0);
+  // state for loading
   const [isLoading, setIsLoading] = useState(true);
+  // state to disable all other answers
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  // state to mark selected answers with colors
+  const [isCorrect, setIsCorrect] = useState(false);
 
   const url =
-    "https://opentdb.com/api.php?amount=5&difficulty=medium&type=multiple&encode=base64";
+    "https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple&encode=base64";
 
   useEffect(() => {
     async function getTests() {
@@ -34,9 +42,10 @@ export default function Question() {
     getTests();
   }, []);
 
-  function clickHandler(e) {
+  function clickHandler(e, id) {
     e.target.style.backgroundColor = "#D6DBF5";
     setIschecked([...ischecked, e.target.value]);
+    setSelectedAnswers({ ...selectedAnswers, [id]: true });
   }
 
   function check() {
@@ -45,6 +54,7 @@ export default function Question() {
       .filter((correctAnswer) => ischecked.includes(correctAnswer));
     const score = correct.length;
     setScore(score);
+    setIsCorrect(true);
   }
 
   const list = tests.map((test) => {
@@ -52,34 +62,38 @@ export default function Question() {
       <div className="container" key={test.id}>
         <h2 className="question">{atob(test.question)}</h2>
         <button
-          className="answer-btn"
-          onClick={clickHandler}
+          className={"answer-btn"}
+          onClick={(e) => clickHandler(e, test.id)}
           value={test.answers[0]}
           type="button"
+          disabled={selectedAnswers[test.id]}
         >
           {atob(test.answers[0])}
         </button>
         <button
-          className="answer-btn"
-          onClick={clickHandler}
+          className={"answer-btn"}
+          onClick={(e) => clickHandler(e, test.id)}
           value={test.answers[1]}
           type="button"
+          disabled={selectedAnswers[test.id]}
         >
           {atob(test.answers[1])}
         </button>
         <button
-          className="answer-btn"
-          onClick={clickHandler}
+          className={"answer-btn"}
+          onClick={(e) => clickHandler(e, test.id)}
           value={test.answers[2]}
           type="button"
+          disabled={selectedAnswers[test.id]}
         >
           {atob(test.answers[2])}
         </button>
         <button
-          className="answer-btn"
-          onClick={clickHandler}
+          className={"answer-btn"}
+          onClick={(e) => clickHandler(e, test.id)}
           value={test.answers[3]}
           type="button"
+          disabled={selectedAnswers[test.id]}
         >
           {atob(test.answers[3])}
         </button>

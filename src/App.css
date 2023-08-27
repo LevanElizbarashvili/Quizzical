@@ -7,7 +7,7 @@ body {
 /* start-screen */
 
 .main-div {
-  width: 90%;
+  width: 100%;
   min-height: 100vh;
   background-color: #F5F7FB;
   display: flex;
@@ -37,16 +37,14 @@ body {
 
 .main-div .blob1 {
   width: 40%;
-  text-align: right;
-  position: absolute;
   overflow: hidden;
+  position: absolute;
   right: -15%;
-  top: -30%;
+  top: -40%;
 }
 
 .main-div .blob2 {
   width: 40%;
-  text-align: left;
   position: absolute;
   overflow: hidden;
   left: -7%;
@@ -78,8 +76,6 @@ body {
 }
 
 .main-div .check-button {
-  margin-top: 50px;
-  margin-left: 45%;
   width: 200px;
   height: 50px;
   background-color: #4D5B9E;
@@ -102,5 +98,11 @@ body {
 .score-button-container {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  margin-top: 45px;
+}
+
+.correct-answer {
+  background-color: #94D7A2;
+  color: #293264;
 }
