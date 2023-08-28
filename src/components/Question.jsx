@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import shuffleArray from "../utils";
+import { render } from "react-dom";
 
 export default function Question() {
   // state to store questions
@@ -19,26 +20,26 @@ export default function Question() {
   const url =
     "https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple&encode=base64";
 
-  useEffect(() => {
-    async function getTests() {
-      const res = await fetch(url);
-      const data = await res.json();
-      const arr = [];
-      data.results.forEach((element) => {
-        arr.push({
-          id: nanoid(),
-          question: element.question,
-          correct: element.correct_answer,
-          answers: shuffleArray([
-            ...element.incorrect_answers,
-            element.correct_answer,
-          ]),
-        });
+  async function getTests() {
+    const res = await fetch(url);
+    const data = await res.json();
+    const arr = [];
+    data.results.forEach((element) => {
+      arr.push({
+        id: nanoid(),
+        question: element.question,
+        correct: element.correct_answer,
+        answers: shuffleArray([
+          ...element.incorrect_answers,
+          element.correct_answer,
+        ]),
       });
-      setTests((prevState) => (prevState = arr));
-      setIsLoading(false);
-    }
+    });
+    setTests((prevState) => (prevState = arr));
+    setIsLoading(false);
+  }
 
+  useEffect(() => {
     getTests();
   }, []);
 
@@ -57,12 +58,27 @@ export default function Question() {
     setIsCorrect(true);
   }
 
+  function reset() {
+    setScore(0);
+    setIsCorrect(false);
+    setIschecked([]);
+    setSelectedAnswers({});
+    setIsLoading(true);
+    getTests().then(() => {
+      setIsLoading(false);
+    });
+  }
+
   const list = tests.map((test) => {
     return (
       <div className="container" key={test.id}>
         <h2 className="question">{atob(test.question)}</h2>
         <button
-          className={"answer-btn"}
+          className={
+            isCorrect && test.answers[0] === test.correct
+              ? "answer-btn  correct-answer"
+              : "answer-btn"
+          }
           onClick={(e) => clickHandler(e, test.id)}
           value={test.answers[0]}
           type="button"
@@ -71,7 +87,11 @@ export default function Question() {
           {atob(test.answers[0])}
         </button>
         <button
-          className={"answer-btn"}
+          className={
+            isCorrect && test.answers[1] === test.correct
+              ? "answer-btn  correct-answer"
+              : "answer-btn"
+          }
           onClick={(e) => clickHandler(e, test.id)}
           value={test.answers[1]}
           type="button"
@@ -80,7 +100,11 @@ export default function Question() {
           {atob(test.answers[1])}
         </button>
         <button
-          className={"answer-btn"}
+          className={
+            isCorrect && test.answers[2] === test.correct
+              ? "answer-btn  correct-answer"
+              : "answer-btn"
+          }
           onClick={(e) => clickHandler(e, test.id)}
           value={test.answers[2]}
           type="button"
@@ -89,7 +113,11 @@ export default function Question() {
           {atob(test.answers[2])}
         </button>
         <button
-          className={"answer-btn"}
+          className={
+            isCorrect && test.answers[3] === test.correct
+              ? "answer-btn  correct-answer"
+              : "answer-btn"
+          }
           onClick={(e) => clickHandler(e, test.id)}
           value={test.answers[3]}
           type="button"
@@ -112,9 +140,15 @@ export default function Question() {
             <div className="score">
               {score ? "Correct answers: " + score + "/5" : ""}
             </div>
-            <button className="check-button" onClick={check}>
-              Check answers
-            </button>
+            {isCorrect ? (
+              <button className="check-button" onClick={reset}>
+                Play again
+              </button>
+            ) : (
+              <button className="check-button" onClick={check}>
+                Check answers
+              </button>
+            )}
           </div>
         </div>
       )}
